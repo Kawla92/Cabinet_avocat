@@ -8,6 +8,13 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Détection de l'environnement
+const isVercel = process.env.VERCEL === '1';
+const isProduction = process.env.NODE_ENV === 'production';
+
+console.log(`🚀 Environnement détecté: ${isVercel ? 'Vercel' : 'Local'}`);
+console.log(`🌍 Mode: ${isProduction ? 'Production' : 'Développement'}`);
+
 // Middleware de sécurité
 app.use(helmet({
     contentSecurityPolicy: {
@@ -104,7 +111,8 @@ app.post('/api/contact', contactValidationRules, handleValidationErrors, async (
                 nom,
                 prénom,
                 email,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                environment: isVercel ? 'Vercel' : 'Local'
             }
         });
 
@@ -122,7 +130,9 @@ app.get('/api/health', (req, res) => {
     res.json({
         status: 'OK',
         timestamp: new Date().toISOString(),
-        uptime: process.uptime()
+        uptime: process.uptime(),
+        environment: isVercel ? 'Vercel' : 'Local',
+        mode: isProduction ? 'Production' : 'Développement'
     });
 });
 
@@ -143,9 +153,15 @@ app.use((error, req, res, next) => {
     });
 });
 
-// Démarrage du serveur
-app.listen(PORT, () => {
-    console.log(`🚀 Serveur démarré sur le port ${PORT}`);
-    console.log(`📧 API de contact disponible sur http://localhost:${PORT}/api/contact`);
-    console.log(`🏠 Page principale disponible sur http://localhost:${PORT}`);
-}); 
+// Démarrage du serveur (seulement si pas sur Vercel)
+if (!isVercel) {
+    app.listen(PORT, () => {
+        console.log(`🚀 Serveur démarré sur le port ${PORT}`);
+        console.log(`📧 API de contact disponible sur http://localhost:${PORT}/api/contact`);
+        console.log(`🏠 Page principale disponible sur http://localhost:${PORT}`);
+        console.log(`💡 Mode: ${isProduction ? 'Production' : 'Développement'}`);
+    });
+}
+
+// Export pour Vercel
+module.exports = app; 
