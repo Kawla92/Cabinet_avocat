@@ -8,12 +8,8 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Détection de l'environnement
-const isVercel = process.env.VERCEL === '1';
-const isProduction = process.env.NODE_ENV === 'production';
-
-console.log(`🚀 Environnement détecté: ${isVercel ? 'Vercel' : 'Local'}`);
-console.log(`🌍 Mode: ${isProduction ? 'Production' : 'Développement'}`);
+console.log('🚀 Serveur Maître Benarab - Mode Localhost');
+console.log(`🌍 Port: ${PORT}`);
 
 // Middleware de sécurité
 app.use(helmet({
@@ -88,7 +84,7 @@ app.post('/api/contact', contactValidationRules, handleValidationErrors, async (
         const { nom, prénom, email, message } = req.body;
         
         // Log des données reçues (pour debug)
-        console.log('Nouveau message reçu:', {
+        console.log('📧 Nouveau message reçu:', {
             nom,
             prénom,
             email,
@@ -112,12 +108,12 @@ app.post('/api/contact', contactValidationRules, handleValidationErrors, async (
                 prénom,
                 email,
                 timestamp: new Date().toISOString(),
-                environment: isVercel ? 'Vercel' : 'Local'
+                environment: 'Localhost'
             }
         });
 
     } catch (error) {
-        console.error('Erreur lors du traitement du formulaire:', error);
+        console.error('❌ Erreur lors du traitement du formulaire:', error);
         res.status(500).json({
             success: false,
             message: 'Une erreur est survenue lors de l\'envoi du message. Veuillez réessayer plus tard.'
@@ -131,8 +127,8 @@ app.get('/api/health', (req, res) => {
         status: 'OK',
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
-        environment: isVercel ? 'Vercel' : 'Local',
-        mode: isProduction ? 'Production' : 'Développement'
+        environment: 'Localhost',
+        mode: 'Développement'
     });
 });
 
@@ -146,22 +142,19 @@ app.use((req, res) => {
 
 // Gestionnaire d'erreurs global
 app.use((error, req, res, next) => {
-    console.error('Erreur serveur:', error);
+    console.error('❌ Erreur serveur:', error);
     res.status(500).json({
         success: false,
         message: 'Erreur interne du serveur'
     });
 });
 
-// Démarrage du serveur (seulement si pas sur Vercel)
-if (!isVercel) {
-    app.listen(PORT, () => {
-        console.log(`🚀 Serveur démarré sur le port ${PORT}`);
-        console.log(`📧 API de contact disponible sur http://localhost:${PORT}/api/contact`);
-        console.log(`🏠 Page principale disponible sur http://localhost:${PORT}`);
-        console.log(`💡 Mode: ${isProduction ? 'Production' : 'Développement'}`);
-    });
-}
-
-// Export pour Vercel
-module.exports = app; 
+// Démarrage du serveur
+app.listen(PORT, () => {
+    console.log(`✅ Serveur démarré avec succès !`);
+    console.log(`🌐 Page principale: http://localhost:${PORT}`);
+    console.log(`📧 API contact: http://localhost:${PORT}/api/contact`);
+    console.log(`🏥 API santé: http://localhost:${PORT}/api/health`);
+    console.log(`📝 Logs en temps réel ci-dessous...`);
+    console.log('─'.repeat(50));
+}); 
