@@ -158,3 +158,33 @@ app.listen(PORT, () => {
     console.log(`📝 Logs en temps réel ci-dessous...`);
     console.log('─'.repeat(50));
 }); 
+
+
+const nodemailer = require('nodemailer');
+
+// ... dans la route app.post('/api/contact', ...)
+
+// Créer un transporteur Nodemailer
+let transporter = nodemailer.createTransport({
+    host: process.env.EMAIL_HOST,
+    port: process.env.EMAIL_PORT,
+    secure: process.env.EMAIL_PORT == 465, // true pour 465, false pour les autres ports
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
+
+// Définir les options de l'email
+let mailOptions = {
+    from: `"${nom} ${prénom}" <${email}>`,
+    to: process.env.EMAIL_USER, // L'adresse email de l'avocate
+    subject: `Nouveau message de contact de ${nom} ${prénom}`,
+    text: `Nom: ${nom}\nPrénom: ${prénom}\nEmail: ${email}\nMessage: ${message}`,
+    html: `<p><b>Nom:</b> ${nom}</p><p><b>Prénom:</b> ${prénom}</p><p><b>Email:</b> ${email}</p><p><b>Message:</b> ${message}</p>`
+};
+
+// Envoyer l'email
+await transporter.sendMail(mailOptions);
+
+// ... le reste de votre code de succès
