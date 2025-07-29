@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Maître Benarab, avocat à Tunis, accompagne particuliers et entreprises en droit civil, droit des affaires et droit du travail. Prise de rendez-vous rapide et conseils personnalisés." />
-    <meta name="keywords" content="avocat, légal, loi, droit civil, droit des affaires, Paris, plainte, conseil juridique, entreprise, particulier">
+    <meta name="keywords" content="avocat, légal, loi, droit civil, droit des affaires, Tunis, plainte, conseil juridique, entreprise, particulier">
     <meta name="author" content="Zaroui Khaoula">
+    <meta name="robots" content="index, follow">
     <!-- Open Graph pour réseaux sociaux -->
     <meta property="og:title" content="Maître Benarab – Avocat à Tunis, Droit civil et affaires" />
     <meta property="og:description" content="Maître Benarab, avocat à Tunis, accompagne particuliers et entreprises en droit civil, droit des affaires et droit du travail. Prise de rendez-vous rapide et conseils personnalisés." />
@@ -21,7 +22,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <header>
+    <header id="header">
         <img src="images/icon.png" alt="logo" height="100px" width="100px">
         <h1>Maître Benarab</h1>
         <nav>
@@ -31,7 +32,6 @@
                 <li><a href="#apropos">À propos</a></li>
                 <li><a href="#honoraires">Honoraires</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="#mentions">Mentions légales</a></li>
             </ul>
         </nav>
     </header>
@@ -51,7 +51,7 @@
             </section>
             <section id="apropos" class="text-center">
                 <h2 class="text-center">À propos</h2>
-                <p>Maître Benarab, diplômé de l'Université de lorem, accompagne ses clients avec rigueur et écoute depuis plus de 10 ans.</p>
+                <p>Maître Benarab, diplômée de l'Université de sciences juridiques de Tunis, accompagne ses clients avec rigueur et écoute depuis plus de 10 ans.</p>
             </section>
             <section id="honoraires" class="text-center">
                 <h2 class="text-center">Honoraires</h2>
@@ -59,27 +59,25 @@
             </section>
             <section id="contact">
                 <h2 class="text-center">Contact</h2>
-                <span class="d-block text-center">
-  <i class="fa fa-user fa-3x" style="color: #e0b973; text-shadow: 2px 2px 2px #f4f4f4; padding: 50px 0;"></i>
-</span>
+                <img src="images/user.png" alt="user" class="user-icon">
                 <form class="contact-form" id="contact-form" method="post" action="/api/contact">
                     <div class="form-group">
                         <label for="nom">Nom :</label>
                         <input type="text" id="nom" name="nom" class="form-control" required
   pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ\- ]{2,50}$"
-  title="2 à 50 lettres, accents et tirets autorisés">
+  title="2 à 50 lettres, accents et tirets autorisés" placeholder="Saisir votre nom">
                     </div>
                     <div class="form-group">
                         <label for="prenom">Prénom :</label>
                         <input type="text" id="prenom" name="prénom" class="form-control" required
                         pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ\- ]{2,50}$"
-                        title="2 à 50 lettres, accents et tirets autorisés">
+                        title="2 à 50 lettres, accents et tirets autorisés" placeholder="Saisir votre prénom">
                     </div>
                     <div class="form-group">
                         <label for="email">Email :</label>
                         <input type="email" id="email" name="email" class="form-control" required 
                         pattern="^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,}$/"
-                        title="Veuillez entrer un email valide">
+                        title="Veuillez entrer un email valide" placeholder="ex: abc@gmail.com">
                     </div>
                     <div class="form-group">
                         <label for="message">Message :</label>
@@ -88,22 +86,36 @@
   pattern="^[\s\S]{10,1000}$"
   title="Le message doit contenir entre 10 et 1000 caractères"></textarea>
                     </div>
-                        <button type="submit" class="btn btn-primary btn-lg btn-block" role="button">Envoyer</button>
+                        <button type="submit" class="btn-lg btn-block" role="button">Envoyer</button>
                 </form>
+                <h3 class="text-center">- Coordonnées - </h3>
+                    <p><i class="fa fa-phone"></i> 70 xxx xxx</p>
+                <address><i class="fa fa-map-marker"></i> 22 rue Slimen Ben Slimen, El Manar Tunis</address>
+                <p><img src="images/gmail.png" alt="mail" width="25px" height="20px"> xyz@gmail.com</p>
             </section>
-            <section id="mentions">
-                <h2 class="text-center">Mentions légales</h2>
-                <p>- Cabinet de Maître Benarab - </p>
-                    <p><i class="fa fa-phone"></i> 71 xxx xxx</p>
-                <address><i class="fa fa-map-marker"></i> 22 rue Sliman ben sliman, El Manar Tunis</address>
-            </section>
+           
         </div>
     </main>
+    <a href="#header" aria-label="Retour en haut de la page"><button id="backToTop" class="back-to-top" aria-label="Retour en haut de la page" role="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button></a>
     <footer>
-        <p>&copy; 2025 Maître Benarab. Tous droits réservés.</p>
+        <div class="footer-content">
+            <div class="socialmedia"> 
+                <h4>Suivez-moi sur :</h4>
+                <a href="#" target="_blank" aria-label="Visitez mon compte Facebook" rel="noopener noreferrer"><button><i class="fa fa-facebook"></i></button></a>
+                <a href="#" target="_blank" aria-label="Visitez mon compte LinkedIn" rel="noopener noreferrer"><button><i class="fa fa-linkedin"></i></button></a>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Maître Benarab. Tous droits réservés.</p>
+            </div>
+        </div>
+        
     </footer>
 
     <script src="script.js"></script>
-    <script src="server.js"></script>
+   
 </body>
 </html>
