@@ -26,13 +26,8 @@ Le projet n’a finalement pas été retenu, mais il représente une étude comp
 - "server.js" → logique backend simple
 - "package.json" → dépendances
 
-🚀 Lancer le projet en local
-
-npm install
-node server.js
-
-Puis ouvrir :
-http://localhost:3000
+Démo :
+https://cabinet-avocat-one.vercel.app/
 
 💡 Ce que j’ai appris
 
@@ -43,12 +38,11 @@ http://localhost:3000
 ⚠️ Remarques
 
 - Les données présentes sont fictives
-- Aucune information réelle ou sensible n’est utilisée
+- Aucune information réelle
+- ou sensible n’est utilisée
 
 📎 Statut
 
-Projet non retenu par le client — utilisé ici comme démonstration de compétences
-
-👩‍💻 Auteur
+Prototype initial réalisé en amont du premier rendez-vous afin de matérialiser rapidement une direction possible.
 
 Khaoula.
